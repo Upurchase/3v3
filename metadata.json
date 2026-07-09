@@ -1,0 +1,6 @@
+{
+  "name": "3v3 TDM Battle",
+  "description": "A 3v3 Team Deathmatch Battle Royale style game built for HTML5 Canvas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=JetBrains+Mono:wght@400;500;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+  font-size: 8px; /* Scales down rem units to 50% so it looks good at 100% browser zoom */
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 6px; /* Even smaller for mobile */
+  }
+}
+
+@media (min-width: 1536px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@keyframes grenade-cooldown {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 188.5;
+  }
+}
+
+@keyframes scope-breathe {
+  0%, 100% {
+    box-shadow: inset 0 0 20px rgba(0,255,255,0.3), 0 0 10px rgba(0,255,255,0.4);
+    border-color: rgba(6, 182, 212, 0.8);
+  }
+  50% {
+    box-shadow: inset 0 0 40px rgba(0,255,255,0.6), 0 0 20px rgba(0,255,255,0.8);
+    border-color: rgba(34, 211, 238, 1);
+  }
+}
+
+.godzilla-scope {
+  animation: scope-breathe 2s ease-in-out infinite;
+}
+
