@@ -1,10 +1,12 @@
-name: Build and Export HTML5
+name: Build and Export ZIP
 
 on:
   push:
     branches: [ "main", "master" ]
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -19,14 +21,23 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Build the game
         run: npm run build
 
-      # Provides a downloadable ZIP file in GitHub Actions tab for manual upload (like Itch.io)
-      - name: Upload Build Artifact for Download
-        uses: actions/upload-artifact@v4
+      - name: Create ZIP file
+        run: |
+          cd dist
+          zip -r ../BlockOps-Game.zip .
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: HTML5-Game-Build
-          path: dist/
+          tag_name: build-${{ github.run_number }}
+          name: "Game Build (HTML5 ZIP)"
+          body: "Download the attached BlockOps-Game.zip file. Extract it and upload to any Game Distribution platform or host it on a local server."
+          files: BlockOps-Game.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
